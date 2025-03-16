@@ -1,21 +1,19 @@
-import { Router } from 'express';
+import mongoose from 'mongoose';
+import { env } from '../utils/env.js';
+import { ENV_VARS } from '../constants/index.js';
 
-import {
-  getContactsController,
-  getContactByIdController,
-  createContactController,
-  patchContactController,
-  deleteContactController,
-} from '../controllers/contacts.js';
+export const initMongoConnection = async () => {
 
-import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+  const connectionLink = `mongodb+srv://${env(ENV_VARS.MONGODB_USER)}:${env(
+    ENV_VARS.MONGODB_PASSWORD)}@${env(ENV_VARS.MONGODB_URL)}/${env(
+    ENV_VARS.MONGODB_DB,
+  )}?retryWrites=true&w=majority&appName=Cluster0`;
 
-const router = Router();
-
-router.get('/contacts', ctrlWrapper(getContactsController));
-router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController));
-router.post('/contacts', ctrlWrapper(createContactController));
-router.patch('/contacts/:contactId', ctrlWrapper(patchContactController));
-router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
-
-export default router;
+  try {
+    await mongoose.connect(connectionLink);
+    console.log('Mongo connection successfully established!');
+  } catch (err) {
+    console.log('Error while setting up mongo connection', err);
+    throw err;
+  }
+};
