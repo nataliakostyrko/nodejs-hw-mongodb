@@ -3,8 +3,8 @@ import {
   getAllContacts,
   getContactById,
   createContact,
-  updateContact,
   deleteContact,
+  updateContact,
 } from '../services/contacts.js';
 
 export const getContactsController = async (req, res) => {
@@ -34,22 +34,7 @@ export const getContactByIdController = async (req, res) => {
 };
 
 export const createContactController = async (req, res) => {
-  const { name, phoneNumber, email, isFavourite, contactType } = req.body;
-
-  if (!name || !phoneNumber || !contactType) {
-    throw createHttpError(
-      400,
-      'Missing required fields: name, phoneNumber or contactType',
-    );
-  }
-
-  const contact = await createContact({
-    name,
-    phoneNumber,
-    email,
-    isFavourite,
-    contactType,
-  });
+  const contact = await createContact(req.body);
 
   res.status(201).json({
     status: 201,
@@ -60,17 +45,15 @@ export const createContactController = async (req, res) => {
 
 export const patchContactController = async (req, res) => {
   const { contactId } = req.params;
-  const contact = await updateContact(contactId, req.body);
-
-  if (!contact) {
-    throw createHttpError(404, 'Contact not found');
-
+  const result = await updateContact(contactId, req.body);
+  if (!result) {
+    throw createHttpError(404, `Contact with id ${contactId} was not found`);
   }
 
   res.status(200).json({
     status: 200,
-    message: `Successfully patched a contact!`,
-    data: contact,
+    message: `Successfully patched contact with id ${contactId}!`,
+    data: result.contact,
   });
 };
 
