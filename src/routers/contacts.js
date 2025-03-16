@@ -1,43 +1,21 @@
-import { ContactsCollection } from '../db/models/contact.js';
+import { Router } from 'express';
 
-export const getAllContacts = async () => {
-  const contacts = await ContactsCollection.find();
-  return contacts;
-};
+import {
+  getContactsController,
+  getContactByIdController,
+  createContactController,
+  patchContactController,
+  deleteContactController,
+} from '../controllers/contacts.js';
 
-export const getContactById = async (contactId) => {
-  const contact = await ContactsCollection.findById(contactId);
-  return contact;
-};
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
-export const createContact = async (payload) => {
-  const contact = await ContactsCollection.create(payload);
-  return contact;
-};
+const router = Router();
 
-export const updateContact = async (contactId, payload, options = {}) => {
-  const updatedContact = await ContactsCollection.findOneAndUpdate(
-    { _id: contactId },
-    payload,
-    {
-      new: true,
-      includeResultMetadata: true,
-      ...options,
-    },
-  );
+router.get('/contacts', ctrlWrapper(getContactsController));
+router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController));
+router.post('/contacts', ctrlWrapper(createContactController));
+router.patch('/contacts/:contactId', ctrlWrapper(patchContactController));
+router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
 
-  if (!updatedContact || !updatedContact.value) return null;
-
-  return {
-    contact: updatedContact.value,
-    isNew: Boolean(updatedContact?.lastErrorObject?.upserted),
-  };
-};
-
-export const deleteContact = async (contactId) => {
-  const contact = await ContactsCollection.findOneAndDelete({
-    _id: contactId,
-  });
-
-  return contact;
-};
+export default router;
