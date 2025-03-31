@@ -1,59 +1,30 @@
 import { Router } from 'express';
+import { loginUserSchema, registerUserSchema } from '../validation/auth.js';
 import {
-  createContactController,
-  deleteContactController,
-  getAllContactsController,
-  getContactByIdController,
-  patchContactController,
-  upsertContactController,
-} from '../controllers/contacts.js';
+  loginUserController,
+  logoutUserController,
+  refreshUserSessionController,
+  registerUserController,
+} from '../controllers/auth.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
-import {
-  createContactSchema,
-  updateContactSchema,
-} from '../validation/contacts.js';
-import { isValidId } from '../middlewares/isValidId.js';
-import { authenticate } from '../middlewares/authenticate.js';
-import { upload } from '../middlewares/multer.js';
 
-const contactsRouter = Router();
+const authRouter = Router();
 
-contactsRouter.use(authenticate);
-contactsRouter.get('/', ctrlWrapper(getAllContactsController));
-
-contactsRouter.get(
-  '/:contactId',
-  isValidId,
-  ctrlWrapper(getContactByIdController),
+authRouter.post(
+  '/register',
+  validateBody(registerUserSchema),
+  ctrlWrapper(registerUserController),
 );
 
-contactsRouter.post(
-  '/', upload.single('photo'),
-  validateBody(createContactSchema),
-  ctrlWrapper(createContactController),
+authRouter.post(
+  '/login',
+  validateBody(loginUserSchema),
+  ctrlWrapper(loginUserController),
 );
 
-contactsRouter.patch(
-  '/:contactId',
-  isValidId,
-  upload.single('photo'),
-  validateBody(updateContactSchema),
-  ctrlWrapper(patchContactController),
-);
+authRouter.post('/refresh', ctrlWrapper(refreshUserSessionController));
 
-contactsRouter.put(
-  '/:contactId',
-  isValidId,
-  upload.single('photo'),
-  validateBody(createContactSchema),
-  ctrlWrapper(upsertContactController),
-);
+authRouter.post('/logout', ctrlWrapper(logoutUserController));
 
-contactsRouter.delete(
-  '/:contactId',
-  isValidId,
-  ctrlWrapper(deleteContactController),
-);
-
-export default contactsRouter;
+export default authRouter;
