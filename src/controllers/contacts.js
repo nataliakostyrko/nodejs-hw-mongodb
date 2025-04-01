@@ -1,9 +1,9 @@
 import createHttpError from 'http-errors';
 import {
-  getAllContacts,
-  getContactById,
   createContact,
   deleteContact,
+  getAllContacts,
+  getContactById,
   updateContact,
 } from '../services/contacts.js';
 
@@ -12,7 +12,7 @@ import { parseSortParams } from '../utils/parseSortParams.js';
 import { parseFilterParams } from '../utils/parseFilterParams.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
-export const getContactsController = async (req, res) => {
+export const getAllContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
   const filter = parseFilterParams(req.query);
