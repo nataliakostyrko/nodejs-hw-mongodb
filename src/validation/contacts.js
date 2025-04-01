@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { contactTypesList } from '../constants/contacts';
+import { contactTypesList } from '../constants/contacts.js';
 
 
 export const createContactSchema = Joi.object({
