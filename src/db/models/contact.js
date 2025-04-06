@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
-import { contactTypesList } from '../../constants/contacts.js';
 
+import { contactTypesList } from '../../constants/contacts.js';
 
 const contactsSchema = new Schema(
   {
@@ -15,6 +15,7 @@ const contactsSchema = new Schema(
     email: {
       type: String,
       required: false,
+      
     },
     isFavourite: {
       type: Boolean,
@@ -30,6 +31,9 @@ const contactsSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
+    },
+    photo: {
+      type: String,
     },
   },
   {
