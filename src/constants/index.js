@@ -34,7 +34,7 @@ export const FIFTEEN_MINUTES = 15 * 60 * 1000;
 export const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
 export const APP_DOMAIN = 'APP_DOMAIN';
 export const BECKEND_DOMAIN = 'BECKEND_DOMAIN';
-
+export const UPLOAD_DIR = path.join(process.cwd(), 'uploads');
 
 
 export const JWT_SECRET = 'JWT_SECRET';
@@ -42,3 +42,4 @@ export const JWT_SECRET = 'JWT_SECRET';
 export const TEMPLATES_PATH = path.join(process.cwd(), 'src', 'templates');
 export const TEMP_UPLOAD_PATH = path.join(process.cwd(), 'temp');
 export const UPLOAD_PATH = path.join(process.cwd(), 'uploads');
+export const SWAGGER_PATH = path.join(process.cwd(), 'docs', 'swagger.json');
