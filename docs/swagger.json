@@ -275,7 +275,6 @@
                   "_id",
                   "name",
                   "phoneNumber",
-                  "email",
                   "contactType",
                   "userId"
                 ],
