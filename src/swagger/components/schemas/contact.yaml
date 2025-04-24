@@ -27,10 +27,7 @@ properties:
     description: 'True if contact is favourite'
     type: boolean
     example: true
-  contactType:
-    description: "Contact's type"
-    type: string
-    enum: ['work', 'home', 'personal']
+    
   photo:
     description: "Link to contact's photo"
     type: string
