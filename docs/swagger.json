@@ -258,9 +258,9 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Create a new contact",
+        "summary": "Create contact",
         "operationId": "createContact",
-        "description": "Create a new contact",
+        "description": "Create a contact with payload",
         "security": [
           {
             "bearerAuth": []
@@ -272,26 +272,38 @@
               "schema": {
                 "type": "object",
                 "required": [
+                  "_id",
                   "name",
                   "phoneNumber",
-                  "contactType"
+                  "email",
+                  "contactType",
+                  "userId"
                 ],
                 "properties": {
+                  "_id": {
+                    "description": "Contact's id",
+                    "type": "string",
+                    "example": "65e4decdd286b30065d54af9"
+                  },
                   "name": {
                     "description": "Contact's name",
-                    "type": "string"
+                    "type": "string",
+                    "example": "John Doe"
                   },
                   "phoneNumber": {
                     "description": "Contact's phone number",
-                    "type": "string"
+                    "type": "number",
+                    "example": 380123456789
                   },
                   "email": {
                     "description": "Contact's email",
-                    "type": "string"
+                    "type": "string",
+                    "example": "john@gmail.com"
                   },
                   "isFavourite": {
-                    "description": "True if contact is favourite",
-                    "type": "boolean"
+                    "description": "Is the contact favourite?",
+                    "type": "boolean",
+                    "example": false
                   },
                   "contactType": {
                     "description": "Contact's type",
@@ -302,151 +314,24 @@
                       "personal"
                     ]
                   },
+                  "userId": {
+                    "description": "Contact's user id",
+                    "type": "string",
+                    "example": "65e4decdd286b30065d54af9"
+                  },
                   "photo": {
-                    "description": "Contact's photo file (*.jpg, *.png)",
+                    "description": "Contact's photo",
                     "type": "string",
                     "format": "binary"
                   }
                 }
-              },
-              "encoding": {
-                "photo": {
-                  "contentType": "image/*"
-                }
-              },
-               "examples": {
-                "example1": {
-                  "summary": "Example with photo",
-                  "value": {
-                    "name": "Gal Gadot",
-                    "phoneNumber": "+380000001888",
-                    "email": "gal.gadot@gmail.com",
-                    "isFavourite": true,
-                    "contactType": "work",
-                    "photo": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVF..."
-                  }
-                }
-              }
-            },
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "$ref": "#/components/schemas/contact"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Successfully created a contact",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 201
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully created a contact"
-                    },
-                    "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/contact"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Contacts"
-        ],
-        "summary": "Get list of contacts",
-        "operationId": "getAllContacts",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "page",
-            "schema": {
-              "type": "integer"
-            },
-            "required": false
-          },
-          {
-            "in": "query",
-            "name": "perPage",
-            "schema": {
-              "type": "integer"
-            },
-            "required": false
-          },
-          {
-            "in": "query",
-            "name": "sortBy",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "_id",
-                "name",
-                "phoneNumber",
-                "email",
-                "isFavourite",
-                "contactType"
-              ]
-            },
-            "required": false
-          },
-          {
-            "in": "query",
-            "name": "sortOrder",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            },
-            "required": false
-          },
-          {
-            "in": "query",
-            "name": "isFavourite",
-            "schema": {
-              "type": "boolean"
-            },
-            "required": false
-          },
-          {
-            "in": "query",
-            "name": "type",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "work",
-                "home",
-                "personal"
-              ]
-            },
-            "required": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully found list of contacts.",
+            "description": "Creates a contact",
             "content": {
               "application/json": {
                 "schema": {
@@ -459,55 +344,15 @@
                   "properties": {
                     "status": {
                       "type": "integer",
-                      "example": 200
+                      "example": 201
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully found contacts!"
+                      "example": "Successfully created a contact!"
                     },
                     "data": {
                       "type": "object",
-                      "required": [
-                        "data",
-                        "page",
-                        "perPage",
-                        "totalItems",
-                        "totalPages",
-                        "hasNextPage",
-                        "hasPreviousPage"
-                      ],
-                      "properties": {
-                        "data": {
-                          "type": "array",
-                          "items": {
-                            "$ref": "#/components/schemas/contact"
-                          }
-                        },
-                        "page": {
-                          "type": "integer",
-                          "example": 1
-                        },
-                        "perPage": {
-                          "type": "integer",
-                          "example": 10
-                        },
-                        "totalItems": {
-                          "type": "integer",
-                          "example": 20
-                        },
-                        "totalPages": {
-                          "type": "integer",
-                          "example": 2
-                        },
-                        "hasNextPage": {
-                          "type": "boolean",
-                          "example": true
-                        },
-                        "hasPreviousPage": {
-                          "type": "boolean",
-                          "example": false
-                        }
-                      }
+                      "$ref": "#/components/schemas/contact"
                     }
                   }
                 }
