@@ -459,14 +459,6 @@
                   "isFavourite": {
                     "type": "boolean"
                   },
-                  "contactType": {
-                    "type": "string",
-                    "enum": [
-                      "work",
-                      "home",
-                      "personal"
-                    ]
-                  },
                   "photo": {
                     "description": "Contact's photo file (*.jpg, *.png, etc.)",
                     "type": "string",
@@ -539,15 +531,6 @@
                       "description": "True if contact is favourite",
                       "type": "boolean",
                       "example": true
-                    },
-                    "contactType": {
-                      "description": "Contact's type",
-                      "type": "string",
-                      "enum": [
-                        "work",
-                        "home",
-                        "personal"
-                      ]
                     },
                     "photo": {
                       "description": "Link to contact's photo",
