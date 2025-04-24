@@ -15,7 +15,6 @@ requestBody:
           - phoneNumber
           - email
           - isFavourite
-          - contactType
         properties:
           name:
             description: "Contact's name"
@@ -29,10 +28,6 @@ requestBody:
           isFavourite:
             description: 'True if contact is favourite'
             type: boolean
-          contactType:
-            description: "Contact's type"
-            type: string
-            enum: ['work', 'home', 'personal']
           photo:
             description: Contact's photo file (*.jpg, *.png)
             type: string
@@ -48,7 +43,6 @@ requestBody:
             phoneNumber: '+380000001888'
             email: gal.gadot@gmail.com
             isFavourite: true
-            contactType: work
             photo: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVF...'
     application/json:
       schema:
