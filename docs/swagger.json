@@ -258,7 +258,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Create contact",
+        "summary": "Create a new contact",
         "operationId": "createContact",
         "description": "Create a contact with payload",
         "security": [
@@ -275,7 +275,6 @@
                   "_id",
                   "name",
                   "phoneNumber",
-                  "contactType",
                   "userId"
                 ],
                 "properties": {
@@ -303,15 +302,6 @@
                     "description": "Is the contact favourite?",
                     "type": "boolean",
                     "example": false
-                  },
-                  "contactType": {
-                    "description": "Contact's type",
-                    "type": "string",
-                    "enum": [
-                      "work",
-                      "home",
-                      "personal"
-                    ]
                   },
                   "userId": {
                     "description": "Contact's user id",
