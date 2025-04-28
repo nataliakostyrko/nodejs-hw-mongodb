@@ -72,4 +72,8 @@ responses:
               type: object
               $ref: '../../components/schemas/contact.yaml'
   '401':
-    $ref: '../../components/responses/401.yaml'
+    $ref: ../../components/responses/401.yaml
+  '400':
+    $ref: ../../components/responses/400.yaml
+   
+    

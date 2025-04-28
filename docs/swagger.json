@@ -418,6 +418,9 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
           "401": {
             "$ref": "#/components/responses/401"
           }
@@ -634,6 +637,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           }
@@ -800,6 +806,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           }
@@ -834,6 +843,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
           },
           "404": {
             "$ref": "#/components/responses/404"
@@ -942,12 +954,8 @@
           "_id",
           "name",
           "phoneNumber",
-          "email",
-          "isFavourite",
           "contactType",
-          "photo",
           "userId"
-
         ],
         "properties": {
           "_id": {
