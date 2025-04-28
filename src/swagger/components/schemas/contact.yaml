@@ -1,11 +1,8 @@
 type: object
 required:
-  - name
-  - phoneNumber
-  - email
-  - isFavourite
-  - contactType,
-  - photo
+  - name,
+  - phoneNumber,
+  - contactType
 properties:
   _id:
     description: "Contact's id"
@@ -27,7 +24,7 @@ properties:
     description: 'True if contact is favourite'
     type: boolean
     example: true
-    
+
   photo:
     description: "Link to contact's photo"
     type: string
