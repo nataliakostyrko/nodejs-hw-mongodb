@@ -1,7 +1,7 @@
 import { contactTypesList } from '../constants/contacts.js';
 
 const parseType = (type) => {
-  if (typeof contactType !== 'string') return;
+  if (typeof type !== 'string') return;
   if (contactTypesList.includes(type)) return type;
 };
 
