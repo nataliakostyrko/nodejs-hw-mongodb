@@ -489,20 +489,8 @@
               "type": "boolean"
             },
             "required": false
-          },
-          {
-            "in": "query",
-            "name": "type",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "work",
-                "home",
-                "personal"
-              ]
-            },
-            "required": false
           }
+          
         ],
         "responses": {
           "200": {
